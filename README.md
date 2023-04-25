@@ -74,4 +74,4 @@ int main()
 
 The output of the above program is as follows:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/hello_graphic_world.jpg"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/HelloGraphicWorld.jpg"></a>
