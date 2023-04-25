@@ -43,27 +43,27 @@ int main()
 
 	// output data: (Note that by using > operator in Windows Command Prompt the contents of std::cout can be redirected to a file while the contents of std::cerr remains in the terminal)
 
-	cout << "P3" << endl									// colors are in ASCII
+	cout << "P3" << endl						// colors are in ASCII
 		<< image_width << " " << image_height << endl		// column  row
-		<< max_color << endl;								// value for max color
+		<< max_color << endl;					// value for max color
 
 	// RGB triplets: (rendered from left to right, top to bottom)
 
 	for (int row = image_height - 1; row >= 0; row--)
 	{
 		cerr << '\r' << "Scanlines Remaining: " << row << ' ' << flush;		// ??? Why do we want std::flush here?
-																			// \r means writing from the head of the current line
+											// \r means writing from the head of the current line
 
 		for (int column = 0; column < image_width; column++)
 		{
 			// rgb value ranging 0.0 - 1.0
 			double r = double(column) / (image_width - 1);	// interpolate the width (left == 0; right == 1)
 			double g = double(row) / (image_height - 1);	// interpolate the height (top == 0; bottom == 1)
-			double b = 0.25;								// for each pixel the portion of blue is constant
+			double b = 0.25;				// for each pixel the portion of blue is constant
 
 			int red = int(max_color * r);
 			int green = int(max_color * g);
-			int blue = int(max_color * b);					// ??? what's the difference if we use max_color == 255.999?
+			int blue = int(max_color * b);			// ??? what's the difference if we use max_color == 255.999?
 
 			cout << red << " " << green << " " << blue << endl;
 		}
