@@ -74,4 +74,4 @@ int main()
 
 The output of the above program is as follows: (TODO: producing image of other format using [stb_image.h](https://github.com/nothings/stb))
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/HelloGraphicWorld.jpg" width="400" height="600"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/HelloGraphicWorld.jpg" width="400" height="600" align="center"></a>
