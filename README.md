@@ -9,3 +9,5 @@ This repository aims to record a path tracer that I am currently writing for the
 - Improve the ray-tracer by following closely to [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html).
 
 ---
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/hello_graphic_world.jpg"></a>
