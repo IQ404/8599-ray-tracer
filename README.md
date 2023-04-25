@@ -14,6 +14,8 @@ This repository aims to record a path tracer that I am currently writing for the
 
 ### April 25th 2023
 
+- Hello Graphic World
+
 ```cpp
 /*****************************************************************//**
  * \file   main.cpp
