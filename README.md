@@ -298,7 +298,7 @@ void write_color(std::ostream& os, colorRGB pixel_color)
 ```cpp
 /*****************************************************************//**
  * \file   Ray.h
- * \brief  
+ * \brief  The class representing the ray
  * 
  * \author Xiaoyang
  * \date   April 2023
