@@ -349,3 +349,6 @@ public:
 
 #endif // !RAY_H
 ```
+
+- Create the background scene
+
