@@ -82,4 +82,4 @@ The output of the above program is as follows: (TODO: producing image of other f
 
 - The `Vector3D` class
 
-This is the class that will be used to represent anything that can be encoded as a 3-tuple in $(\mathbb R)^(3)$.
+This is the class that will be used to represent anything that can be encoded as a 3-tuple in $\mathbb R^3$.
