@@ -83,3 +83,210 @@ The output of the above program is as follows: (TODO: producing image of other f
 - The `Vector3D` class
 
 This is the class that will be used to represent anything that can be encoded as a 3-tuple in $\mathbb R^3$.
+
+```cpp
+/*****************************************************************//**
+ * \file   Vector3D.h
+ * \brief  The class of 3D vector for representing geometry in R^3 and RGB color
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef VECTOR3D_H
+#define VECTOR3D_H
+
+#include <iostream>
+#include <cmath>		// to use std::sqrt
+#include <cassert>
+ //#define NDEBUG		// uncomment this if we don't want assertion (e.g. when we want things like inf)
+
+class Vector3D
+{
+	double v[3];
+
+public:
+
+	// Constructors:
+
+	Vector3D()
+		: v{ 0,0,0 }
+	{
+
+	}
+
+	Vector3D(double x, double y, double z)
+		: v{ x,y,z }
+	{
+
+	}
+
+	// Operators:
+
+	Vector3D operator-() const					// additive inverse
+	{
+		return Vector3D{ -v[0], -v[1], -v[2] };
+	}
+
+	double& operator[](int i)
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	double operator[](int i) const
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	Vector3D& operator+=(const Vector3D& u)
+	{
+		v[0] += u.v[0];
+		v[1] += u.v[1];
+		v[2] += u.v[2];
+
+		return *this;
+	}
+
+	Vector3D& operator*=(const double d)
+	{
+		v[0] *= d;
+		v[1] *= d;
+		v[2] *= d;
+
+		return *this;
+	}
+
+	Vector3D& operator/=(const double d)
+	{
+		assert(d != 0.0);
+
+		v[0] /= d;
+		v[1] /= d;
+		v[2] /= d;
+
+		return *this;
+	}
+
+	// Methods:
+
+	double x() const
+	{
+		return v[0];
+	}
+
+	double y() const
+	{
+		return v[1];
+	}
+
+	double z() const
+	{
+		return v[2];
+	}
+
+	double squared_length() const
+	{
+		return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+	}
+
+	double length() const
+	{
+		return std::sqrt(squared_length());
+	}
+
+};
+
+// Unitility Functions:
+
+inline std::ostream& operator<<(std::ostream& os, const Vector3D& v)
+{
+	return os << v.x() << ' ' << v.y() << ' ' << v.z();
+}
+
+inline Vector3D operator+(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() + b.x(), a.y() + b.y(), a.z() + b.z() };
+}
+
+inline Vector3D operator-(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() - b.x(), a.y() - b.y(), a.z() - b.z() };
+}
+
+inline Vector3D operator*(const Vector3D& a, const Vector3D& b)			// Note that this is NOT dot or cross product!
+{
+	return Vector3D{ a.x() * b.x(), a.y() * b.y(), a.z() * b.z() };
+}
+
+inline Vector3D operator*(double d, const Vector3D& v)
+{
+	return Vector3D{ d * v.x(), d * v.y(), d * v.z() };
+}
+
+inline Vector3D operator*(const Vector3D& v, double d)
+{
+	return d * v;
+}
+
+inline Vector3D operator/(const Vector3D& v, double d)
+{
+	return (1 / d) * v;
+}
+
+inline double dot(const Vector3D& a, const Vector3D& b)
+{
+	return a.x() * b.x() + a.y() * b.y() + a.z() * b.z();
+}
+
+inline Vector3D cross(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D
+	{
+		a.y() * b.z() - a.z() * b.y(),
+		a.z() * b.x() - a.x() * b.z(),
+		a.x() * b.y() - a.y() * b.x()
+	};
+}
+
+inline Vector3D unit_vector(const Vector3D& v)
+{
+	return v / v.length();
+}
+
+// For better code readability (as Vector3D will represent things with different physical meanings):
+
+using point3D = Vector3D;
+using colorRGB = Vector3D;
+
+#endif // !VECTOR3D_H
+```
+
+- The `color.h` header
+
+A function is created for outputting a `colorRGB` represented by a `vector3D` to the standard output as follows:
+
+```cpp
+#ifndef COLOR_H
+#define COLOR_H
+
+#include "Vector3D.h"
+
+#include <iostream>
+
+void write_color(std::ostream& os, colorRGB pixel_color)
+{
+	// Assume the rgb component values of colorRGB is in range [0.0, 1.0], and the output integer value is in range [0, 255].
+
+	os << int(255.999 * pixel_color.x()) << ' '
+	   << int(255.999 * pixel_color.y()) << ' '
+	   << int(255.999 * pixel_color.z()) << '\n';
+
+	// ??? Explain why .999 can be necessary.
+	// ??? What is the difference if static_cast<int>() is used instead of int()?
+
+}
+
+#endif // !COLOR_H
+```
