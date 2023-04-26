@@ -435,3 +435,8 @@ int main()
 The output is as follows:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/GradientBackground.jpg" width="600" height="600"></a>
+
+### April 27th 2023
+
+- Render a simplest sphere
+
