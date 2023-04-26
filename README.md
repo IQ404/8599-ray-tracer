@@ -80,6 +80,6 @@ The output of the above program is as follows: (TODO: producing image of other f
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/HelloGraphicWorld.jpg" width="600" height="600"></a>
 
-- The `vec3` class
+- The `Vector3D` class
 
-
+This is the class that will be used to represent anything that can be encoded as a 3-tuple in $(\mathbb R)^(3)$.
