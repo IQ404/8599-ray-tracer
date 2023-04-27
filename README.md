@@ -458,7 +458,7 @@ The output is as follows:
 
 bool is_hitting_sphere(const Point3D& center, double radius, const Ray& ray)	// center/radius of the sphere
 {
-	// hard-coded to determine the number root(s) of the qudratic equation which represents how the ray intersects with the sphere:
+	// hard-coded to determine the number of root(s) of the qudratic equation which represents how the ray intersects with the sphere:
 	Vector3D sphere_factor = ray.origin() - center;
 	double A = dot(ray.direction(), ray.direction());
 	double B = 2.0 * dot(ray.direction(), sphere_factor);
