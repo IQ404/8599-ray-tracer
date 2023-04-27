@@ -440,3 +440,106 @@ The output is as follows:
 
 - Render a ray-traced sphere
 
+```cpp
+/*****************************************************************//**
+ * \file   main.cpp
+ * \brief  main file for 8599 ray tracer
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+// Note: PPM image can be viewed by **Portable Anymap Viewer** on Windows
+
+#include <iostream>
+#include "Vector3D.h"
+#include "color.h"
+#include "Ray.h"
+
+bool is_hitting_sphere(const Point3D& center, double radius, const Ray& ray)	// center/radius of the sphere
+{
+	// hard-coded to determine the number root(s) of the qudratic equation which represents how the ray intersects with the sphere:
+	Vector3D sphere_factor = ray.origin() - center;
+	double A = dot(ray.direction(), ray.direction());
+	double B = 2.0 * dot(ray.direction(), sphere_factor);
+	double C = dot(sphere_factor, sphere_factor) - radius * radius;
+	double discriminant = B * B - 4 * A * C;
+
+	return (discriminant > 0);		// ??? should we include == 0 case?
+}
+
+// 
+
+ColorRGB ray_color(const Ray& ray)		// this currently returns the color of what the ray directly hits (the sphere or the background)
+{
+	// case: hitting a sphere
+	
+	if (is_hitting_sphere({ 0.0,0.0,-1.0 }, 0.5, ray))		// we place a sphere with radius == 0.5 on z-axis where its center is on the viewport plane.
+	{
+		return ColorRGB{ 1.0,1.0,0.0 };		// a sphere in yellow
+	}
+
+	// case: hitting the background (currently, we want a blue-to-white gradient background)
+	
+	Vector3D unit_direction = unit_vector(ray.direction());
+	// Now, unit_direction.y() is between [-1,1], we normalize this range to [0,1] as follows:
+	double height_weighting = 0.5 * (unit_direction.y() + 1.0);
+	// Apply linear interpolation to blend white (at the bottom) and blue (at the top):
+	return (1 - height_weighting) * ColorRGB { 1.0, 1.0, 1.0 } + height_weighting * ColorRGB{ 0.5,0.7,1.0 };
+}
+
+int main()
+{
+	// Parameters of output image:
+
+	const double aspect_ratio = 16.0 / 9.0;		// x/y
+	const int image_width = 400;
+	const int image_height = int(image_width / aspect_ratio);	// ??? use static_cast<int>()?
+
+	// Color Settings:
+
+	const int max_color = 255;
+
+	// Camera & Viewport Settings:
+	// Note: the point on the viewport plane is assumed to be at the centre of the corresponding pixel on the final image.
+
+	double viewport_height = 2.0;
+	double viewport_width = viewport_height * aspect_ratio;		// viewport has the same aspect ratio as the image if the pixels on the display is square shaped.
+	double focal_length = 1.0;		// this is the distance from the camera to the viewport (projection plane).
+	Point3D origin{ 0.0,0.0,0.0 };	// where camera locates.
+	Vector3D horizontal{ viewport_width, 0.0,0.0 };		// for calculating the left-to-right offset of the endpoint on the viewport
+	Vector3D vertical{ 0.0,viewport_height,0.0 };		// for calculating the bottom-to-top offset of the endpoint on the viewport
+	Point3D bottom_left = origin - Vector3D{ 0.0,0.0,focal_length } - (horizontal / 2.0) - (vertical / 2.0);		// the bottom-left point on the viewpoint
+
+
+	// Output Data:
+	// (Note that by using > operator in Windows Command Prompt the contents of std::cout can be redirected to a file while the contents of std::cerr remains in the terminal)
+
+	std::cout << "P3" << '\n'								// colors are in ASCII		(??? Explain the meaning)
+		<< image_width << ' ' << image_height << '\n'		// column  row
+		<< max_color << '\n';								// value for max color
+
+	// RGB triplets: (each rendered as a pixel, from left to right, top to bottom)
+
+	for (int row = image_height - 1; row >= 0; row--)
+	{
+		std::cerr << '\r' << "Scanlines Remaining: " << row << ' ' << std::flush;		// ??? Why do we want std::flush here?
+																						// Note: \r means writing from the head of the current line
+
+		for (int column = 0; column < image_width; column++)
+		{
+			Vector3D horizontal_offset = (double(column) / (image_width - 1)) * horizontal;
+			Vector3D vertical_offset = (double(row) / (image_height - 1)) * vertical;
+			Ray ray{ origin, bottom_left + horizontal_offset + vertical_offset - origin };
+			ColorRGB pixel_color = ray_color(ray);
+			write_color(std::cout, pixel_color);
+		}
+	}
+	std::cerr << '\n'
+			  << "Done."
+			  << '\n';
+}
+```
+
+The output is as follows:
+
