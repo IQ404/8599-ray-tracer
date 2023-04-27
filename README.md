@@ -438,5 +438,5 @@ The output is as follows:
 
 ### April 27th 2023
 
-- Render a simplest sphere
+- Render a ray-traced sphere
 
