@@ -543,3 +543,7 @@ int main()
 
 The output is as follows:
 
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FirstSphere.jpg" width="600" height="600"></a>
+
+- Shade the sphere with its surface normals
+
