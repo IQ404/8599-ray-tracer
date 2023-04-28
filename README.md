@@ -26,7 +26,7 @@ This repository aims to record a path tracer that I am currently writing for the
   
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), VK_NV_ray_tracing
   
-  **Estimated date of completion:** The deadline of this module (CSC8599) is 22th August 2023, efforts on implementing GPU accelerations should not cease earlier than this date.
+  **Estimated date of completion:** The deadline of this module (CSC8599) is 22th August 2023, efforts on implementing GPU accelerations should cease no earlier than this date.
 
 ---
 
