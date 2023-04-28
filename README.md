@@ -1,6 +1,6 @@
 # 8599 Ray Tracer
 
-This repository aims to record a path tracer that I am currently writing for the course CSC8599.
+This repository aims to record a path tracer that I am currently writing for my MSc module CSC8599.
 
 ## Objectives:
 
