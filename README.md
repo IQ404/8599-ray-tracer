@@ -496,7 +496,7 @@ ColorRGB ray_color(const Ray& ray)		// this currently returns the color of what 
 	// Now, unit_direction.y() is between [-1,1], we normalize this range to [0,1] as follows:
 	double height_weighting = 0.5 * (unit_direction.y() + 1.0);
 	// Apply linear interpolation to blend white (at the bottom) and blue (at the top):
-	// Note: the interpolation is NOT linear on the viewport
+	// Note: the interpolation is NOT linear on the viewport.
 	return (1 - height_weighting) * ColorRGB { 1.0, 1.0, 1.0 } + height_weighting * ColorRGB{ 0.5,0.7,1.0 };
 }
 
