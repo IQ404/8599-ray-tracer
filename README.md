@@ -28,13 +28,9 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   **Estimated date of completion:** The deadline of this module (CSC8599) is <ins>22nd August 2023</ins>, efforts on implementing GPU accelerations on this particular project should cease no earlier than this date.
 
----
-
 ## Housekeeping:
 
 - When developing this project, I am using a laptop with <ins>11980HK</ins> and <ins>RTX3080 (laptop version)</ins>.
-
----
 
 ## Progression
 
