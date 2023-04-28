@@ -8,7 +8,7 @@ This repository aims to record a path tracer that I am currently writing for the
   
   <ins>Possible references</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
-  **Estimated date of completion:** <ins>15th May 2023</ins>
+  **Estimated date of completion:** <ins>mid May 2023</ins>
 
 - Improve the ray-tracer by adding more advanced features to it.
   
