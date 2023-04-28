@@ -560,6 +560,8 @@ The output is as follows:
 
 - Shade the sphere with its surface normals
 
+We will map $rgb$ linearly from the unit normal vector $(n_x, n_y, n_z)$.
+
 ```cpp
 /*****************************************************************//**
  * \file   main.cpp
