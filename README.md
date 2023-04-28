@@ -20,6 +20,11 @@ This repository aims to record a path tracer that I am currently writing for the
   
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), VK_NV_ray_tracing
 
+---
+
+## Housekeepings:
+
+- When developing this project, I am using a laptop with <ins>11980HK</ins> and <ins>RTX3080 (laptop version)</ins>.
 
 ---
 
