@@ -284,6 +284,14 @@ using colorRGB = Vector3D;
 A function is created for outputting a `colorRGB` represented by a `vector3D` to the standard output as follows:
 
 ```cpp
+/*****************************************************************//**
+ * \file   color.h
+ * \brief  Utility Functions for outputting ColorRGB object as pixel
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+ 
 #ifndef COLOR_H
 #define COLOR_H
 
