@@ -22,7 +22,7 @@ This repository aims to record a path tracer that I am currently writing for the
   
   **Estimated date of completion:** optimization should be ongoing indefinitely. But the first complete version of the ray tracer running in real-time is aiming to be finished by the end of May 2023
 
-- Try to accelerate the path tracer by GPU.
+- Try to accelerate the path tracer by running code on GPU.
   
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), VK_NV_ray_tracing
   
