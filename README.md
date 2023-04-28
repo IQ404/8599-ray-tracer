@@ -8,25 +8,25 @@ This repository aims to record a path tracer that I am currently writing for the
   
   <ins>Possible references</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
-  **Estimated date of completion:** 15th May 2023
+  **Estimated date of completion:** <ins>15th May 2023</ins>
 
 - Improve the ray-tracer by adding more advanced features to it.
   
   <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html)
   
-  **Estimated date of completion:** early July 2023
+  **Estimated date of completion:** <ins>early July 2023</ins>
 
 - Optimize the path tracer (from the CPU side, e.g. multithreading) and integrate its output into an interactive GUI. Try to achieve >= 10 fps for a scene that contains a relatively small number of items, a relatively low sampling rate and a relatively low resolution, so that we don't need to sacrifice the advanced features as much as possible.
 
   <ins>Possible references</ins>: [the series by The Cherno](https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl&index=1), [Walnut GUI by The Cherno](https://github.com/TheCherno/Walnut), [Futhark](https://github.com/athas/raytracinginoneweekendinfuthark), [boksajak](https://github.com/boksajak/raytracingthenextweek)
   
-  **Estimated date of completion:** optimization should be ongoing indefinitely. But the first complete version of the ray tracer running in real-time is aiming to be finished by the end of May 2023
+  **Estimated date of completion:** optimization should be ongoing indefinitely. But the first complete version of the ray tracer running in real-time is aiming to be finished by the <ins>end of May 2023</ins>
 
 - Try to accelerate the path tracer by running code on GPU.
   
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), VK_NV_ray_tracing
   
-  **Estimated date of completion:** The deadline of this module (CSC8599) is 22th August 2023, efforts on implementing GPU accelerations on this particular project should cease no earlier than this date.
+  **Estimated date of completion:** The deadline of this module (CSC8599) is <ins>22th August 2023</ins>, efforts on implementing GPU accelerations on this particular project should cease no earlier than this date.
 
 ---
 
