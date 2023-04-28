@@ -22,7 +22,7 @@ This repository aims to record a path tracer that I am currently writing for the
 
 ---
 
-## Housekeepings:
+## Housekeeping:
 
 - When developing this project, I am using a laptop with <ins>11980HK</ins> and <ins>RTX3080 (laptop version)</ins>.
 
