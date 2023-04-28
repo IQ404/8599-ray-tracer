@@ -699,7 +699,13 @@ The output is as follows:
 
 ### April 28th 2023
 
-- An abstract class representing any objects in the world that is hittable:
+- An abstract class (`Hittable`) representing any objects in the world that is hittable:
+
+```cpp
+
+```
+
+- Now we can drive `Sphere` class from `Hittable`:
 
 ```cpp
 
