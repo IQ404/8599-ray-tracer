@@ -1013,3 +1013,52 @@ bool CompositeHittable::is_hit_by(const Ray& ray, double t_min, double t_max, Hi
 	return is_hit;
 }
 ```
+
+- Create the main header for common utility
+
+```cpp
+/*****************************************************************//**
+ * \file   RayTracingToolbox.h
+ * \brief  Numeric constants, utility functions and common headers for the ray tracer
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef RAYTRACINGTOOLBOX_H
+#define RAYTRACINGTOOLBOX_H
+
+#include <cmath>
+#include <limits>
+#include <memory>
+
+// Numeric Constants:
+
+const double positive_infinity = std::numeric_limits<double>::infinity();	// (std::numeric_limits<double>::max() < std::numeric_limits<double>::infinity()) == true
+const double pi = 3.141592653589793'2385;	// ??? Is the precision of a double able to store the digits after 3.141592653589793?
+
+// Utility Functions:
+
+inline double degrees_to_radians(double degrees)
+{
+	return (degrees / 180.0) * pi;
+}
+
+// Common Headers:
+
+#include "Vector3D.h"
+#include "Ray.h"
+
+
+#endif // !RAYTRACINGTOOLBOX_H
+```
+
+- Currently, our `main.cpp` becomes:
+
+```cpp
+
+```
+
+### April 30th 2023
+
+- Antialising
