@@ -948,10 +948,20 @@ Since `CompositeHittable` is hittable, it's natural to make it a `Hittable`:
 #include <vector>
 #include "Hittable.h"
 
+/*
+C++ side notes on shared pointers:
+	
+	std::shared_ptr<T> is an pointer encapsulated with reference-counting semantics such that it is automatically deleted when the counting is 0.
+	
+	shared_ptr<T> sptr = make_shared<T>(T_constructor_params ...);	// make_shared allocates the object on the heap
+
+	Moreover, there is no way to manage a stack allocated object with a shared pointer!
+*/
+
 class CompositeHittable : public Hittable
 {
 	std::vector<std::shared_ptr<Hittable>> components;
-
+	
 public:
 
 	// Constructors:
