@@ -932,5 +932,57 @@ bool Sphere::is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& re
 Since `CompositeHittable` is hittable, it's natural to make it a `Hittable`:
 
 ```cpp
+/*****************************************************************//**
+ * \file   CompositeHittable.h
+ * \brief  The declaration of the class representing hittable that is made by hittables
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef COMPOSITEHITTABLE_H
+#define COMPOSITEHITTABLE_H
+
+#include <memory>	// to use smart pointers
+#include <vector>
+#include "Hittable.h"
+
+class CompositeHittable : public Hittable
+{
+	std::vector<std::shared_ptr<Hittable>> components;
+
+public:
+
+	// Constructors:
+
+	CompositeHittable()
+	{
+
+	}
+
+	CompositeHittable(std::shared_ptr<Hittable> hittable_object)
+	{
+		components.push_back(hittable_object);
+	}
+
+	// Methods:
+
+	void clear()
+	{
+		components.clear();
+	}
+
+	void add(std::shared_ptr<Hittable> hittable_object)
+	{
+		components.push_back(hittable_object);
+	}
+
+	virtual bool is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const override;
+};
+
+#endif // !COMPOSITEHITTABLE_H
+```
+
+```cpp
 
 ```
