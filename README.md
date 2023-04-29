@@ -838,3 +838,93 @@ bool Sphere::is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& re
 
 ### April 29th 2023
 
+- Add the information of which side of the surface that the ray is coming from to `HitRecord`
+
+```cpp
+/*****************************************************************//**
+ * \file   Hittable.h
+ * \brief  The abstract class for anything that can be hitted by the ray
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef HITTABLE_H
+#define HITTABLE_H
+
+#include "Ray.h"
+
+struct HitRecord		// ??? How is HitRecord useful as it does not record the information about the ray?
+{
+	Point3D point;
+	Vector3D normal;
+	double t;
+	bool is_hitting_front_face;
+
+	// Assume for any geometric entity rendered by this ray tracer, there is a defined front face (and thus a back face) and thus a front (i.e. outward) normal. (??? What about Klein bottle/ring?)
+	// We choose to set the normal to always towards the ray:
+	inline void set_normal(const Ray& ray, const Vector3D& outward_normal)		// Setting the normal and the front-back bool
+	// ??? Isn't in-class method implicitly inlined? Can we delete the explicit inline keyword?
+	{
+		is_hitting_front_face = (dot(ray.direction(), outward_normal) < 0.0);	// NOTE: Hitting at right angle is counted as hitting from outside
+		normal = is_hitting_front_face ? (outward_normal) : (-outward_normal);
+	}
+};
+
+class Hittable
+{
+public:
+	virtual bool is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const = 0;
+};
+
+#endif // !HITTABLE_H
+```
+
+Hence, the `is_hit_by` method of the `Sphere` class becomes:
+
+```cpp
+/*****************************************************************//**
+ * \file   Sphere.cpp
+ * \brief  Class definition for ray-hittable sphere
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#include "Sphere.h"
+
+// Side-note: virtual keyword is not needed AND not allowed to be outside a class declaration, and thus for a virtual function defintion outside the class we also can declare it with override
+
+bool Sphere::is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const
+{
+	Vector3D sphere_factor = ray.origin() - center;
+	double A = ray.direction().squared_length();
+	double half_B = dot(ray.direction(), sphere_factor);
+	double C = sphere_factor.squared_length() - radius * radius;
+	double discriminant = half_B * half_B - A * C;
+
+	if (discriminant < 0.0)		// at this stage, discriminant == 0 case isn't rejected.
+	{
+		return false;
+	}
+
+	double dist = std::sqrt(discriminant);
+	double root = ((-half_B) - dist) / A;	// the "near" root
+	if (root < t_min || t_max < root)
+	{
+		root = ((-half_B) + dist) / A;		// the "far" root
+		if (root < t_min || t_max < root)	// in-range far root is ACCEPTED when near root is rejected
+		{
+			return false;
+		}
+	}
+	// record the intersection:
+	record.t = root;
+	record.point = ray.at(root);
+	record.set_normal(ray, (record.point - center) / radius);
+
+	return true;
+}
+```
+
+- 
