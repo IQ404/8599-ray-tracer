@@ -713,8 +713,36 @@ The output is as follows:
 
 - An abstract class (`Hittable`) representing any objects in the world that is hittable:
 
-```cpp
+We add an extra control of "visibility": only hits that are in $[t_{min}, t_{max}]$ are considered.
 
+```cpp
+/*****************************************************************//**
+ * \file   Hittable.h
+ * \brief  The abstract class for anything that can be hitted by the ray
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef HITTABLE_H
+#define HITTABLE_H
+
+#include "Ray.h"
+
+struct HitRecord		// ??? How is HitRecord useful as it does not record the information about the ray?
+{
+	Point3D point;
+	Vector3D normal;
+	double t;
+};
+
+class Hittable
+{
+public:
+	virtual bool is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const = 0;
+};
+
+#endif // !HITTABLE_H
 ```
 
 - Now we can drive `Sphere` class from `Hittable`:
