@@ -927,4 +927,10 @@ bool Sphere::is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& re
 }
 ```
 
-- 
+- Create a class `CompositeHittable` to represent an entity that is hittable by the ray and is consist of multiple `Hittable` objects
+
+Since `CompositeHittable` is hittable, it's natural to make it a `Hittable`:
+
+```cpp
+
+```
