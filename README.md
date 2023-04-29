@@ -1164,7 +1164,7 @@ int main()
 
 which renders the following image:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/surface_normal_with_ground.jpg" width="600" height="600"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/surface_normal_with_ground.jpg" width="700" height="600"></a>
 
 ### April 30th 2023
 
