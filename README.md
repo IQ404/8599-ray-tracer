@@ -1069,7 +1069,7 @@ inline double degrees_to_radians(double degrees)
 ```cpp
 /*****************************************************************//**
  * \file   main.cpp
- * \brief  main file for 8599 ray tracer
+ * \brief  The renderer for 8599 ray tracer
  *
  * \author Xiaoyang Liu
  * \date   April 2023
