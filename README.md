@@ -1059,6 +1059,10 @@ inline double degrees_to_radians(double degrees)
 
 ```
 
+which renders the following image:
+
+<img src="" width="600" height="600"></a>
+
 ### April 30th 2023
 
 - Antialising
