@@ -748,5 +748,44 @@ public:
 - Now we can drive `Sphere` class from `Hittable`:
 
 ```cpp
+/*****************************************************************//**
+ * \file   Sphere.h
+ * \brief  Class declaration for ray-hittable sphere
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef SPHERE_H
+#define SPHERE_H
+
+#include "Hittable.h"
+
+class Sphere : Hittable
+{
+	Point3D center;
+	double radius;
+
+public:
+
+	Sphere()	// currently, radius is uninitialized! what default value should we set?
+	{
+
+	}
+
+	Sphere(Point3D centre, double r)
+		: center{ centre }, radius{r}
+	{
+
+	}
+
+	virtual bool is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const override;
+};
+
+#endif // !SPHERE_H
+
 
 ```
+
+### April 29th 2023
+
