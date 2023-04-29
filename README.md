@@ -761,6 +761,12 @@ public:
 
 #include "Hittable.h"
 
+/*
+C++ side note:
+If we don't provide class access specifier in inheritance,
+it would be public if the sub-class is declared as struct and be private if the sub-class is declared as class
+*/
+
 class Sphere : public Hittable
 {
 	Point3D center;
