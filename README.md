@@ -713,7 +713,7 @@ The output is as follows:
 
 - An abstract class (`Hittable`) representing any objects in the world that is hittable:
 
-We add an extra control of "visibility": only hits that are in $[t_{min}, t_{max}]$ are considered.
+We add an extra control of "visibility": only hits that are in $[t_{min}, t_{max}]$ are considered. (Recall the ray is represented as $P(t)=A+tB$)
 
 ```cpp
 /*****************************************************************//**
