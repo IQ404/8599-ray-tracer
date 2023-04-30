@@ -1380,4 +1380,4 @@ inline double random_real_number(double min, double max)	// returns value in [mi
 
 ### May 1st 2023
 
-- 
+- Create the `Camera` class
