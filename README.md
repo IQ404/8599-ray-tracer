@@ -1311,4 +1311,9 @@ int main()
 }
 ```
 
+The results are as follows:
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FirstMultithreadingBenchmark.jpg" width="640" height="600"></a>
+
 - Antialising
+
