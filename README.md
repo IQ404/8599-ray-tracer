@@ -1315,7 +1315,9 @@ The results are as follows:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FirstMultithreadingBenchmark.jpg" width="640" height="240"></a>
 
-- Create utility functions for generating random reals:
+- Create utility functions for
+  - generating random reals
+  - 
 
 ```cpp
 /*****************************************************************//**
