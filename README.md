@@ -1315,5 +1315,67 @@ The results are as follows:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FirstMultithreadingBenchmark.jpg" width="640" height="240"></a>
 
-- 
+- Create utility functions for generating random reals:
 
+```cpp
+/*****************************************************************//**
+ * \file   RayTracingToolbox.h
+ * \brief  Numeric constants, utility functions and common headers for the ray tracer
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef RAYTRACINGTOOLBOX_H
+#define RAYTRACINGTOOLBOX_H
+
+#include <cmath>
+#include <limits>
+#include <memory>
+#include <cstdlib>
+#include <cassert>
+
+// Numeric Constants:
+
+const double positive_infinity = std::numeric_limits<double>::infinity();	// (std::numeric_limits<double>::max() < std::numeric_limits<double>::infinity()) == true
+const double pi = 3.141592653589793'2385;	// ??? Is the precision of a double able to store the digits after 3.141592653589793?
+
+// Utility Functions:
+
+inline double degrees_to_radians(double degrees)
+{
+	return (degrees / 180.0) * pi;
+}
+
+inline double random_real_number()	// returns value in [0,1)
+// Note that we want to exclude 1
+{
+	// use current time as seed for random generator
+	std::srand(std::time(nullptr));
+
+	/*
+	Note that the value of RAND_MAX is implementation defined.
+	With this in mind, the following expression is designed to prevent incorrect return value due to integer overflow and the limited precision of floating point calculation.
+	2147483648 is chosen because, while it is large enough, we have (2147483647 / (2147483647 + 1.0)) < 1 evaluated to true.
+	*/
+	return (std::rand() % 2147483648) / ((RAND_MAX < 2147483648) ? (RAND_MAX + 1.0) : (2147483647 + 1.0));
+}
+
+inline double random_real_number(double min, double max)	// returns value in [min,max)
+{
+	assert(min <= max);
+	return min + (max - min) * random_real_number();
+}
+
+// Common Headers:
+
+#include "Vector3D.h"
+#include "Ray.h"
+
+
+#endif // !RAYTRACINGTOOLBOX_H
+```
+
+### May 1st 2023
+
+- 
