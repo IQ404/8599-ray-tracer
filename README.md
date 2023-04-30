@@ -1169,4 +1169,8 @@ which renders the following image:
 
 ### April 30th 2023
 
+- A first attempt to multi-thread the renderer:
+
+
+
 - Antialising
