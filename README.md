@@ -1666,5 +1666,8 @@ For  `sampling rate == 1` where the ray shoots at the center of the pixel, the o
 
 For  `sampling rate == 4`, the output shows:
 
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx4.jpg" width="1000" height="560"></a>
+
 For  `sampling rate == 100`, the output shows:
 
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx100.jpg" width="1000" height="560"></a>
