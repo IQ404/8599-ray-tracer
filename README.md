@@ -1369,6 +1369,19 @@ inline double random_real_number(double min, double max)	// returns value in [mi
 	return min + (max - min) * random_real_number();
 }
 
+inline double clamp(double r, double min, double max)
+{
+	if (r < min)
+	{
+		return min;
+	}
+	if (r > max)
+	{
+		return max;
+	}
+	return r;
+}
+
 // Common Headers:
 
 #include "Vector3D.h"
