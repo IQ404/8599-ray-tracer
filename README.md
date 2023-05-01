@@ -1317,7 +1317,7 @@ The results are as follows:
 
 - Create utility functions for
   - generating random reals
-  - 
+  - clamping reals
 
 ```cpp
 /*****************************************************************//**
