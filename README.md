@@ -1335,6 +1335,7 @@ The results are as follows:
 #include <limits>
 #include <memory>
 #include <cstdlib>
+//#include <ctime>
 #include <cassert>
 
 // Numeric Constants:
@@ -1352,8 +1353,7 @@ inline double degrees_to_radians(double degrees)
 inline double random_real_number()	// returns value in [0,1)
 // Note that we want to exclude 1
 {
-	// use current time as seed for random generator
-	std::srand(std::time(nullptr));
+	// TODO: ??? How to randomize the seed? (We probably don't want to use std::time since this is aiming for a real-time application)
 
 	/*
 	Note that the value of RAND_MAX is implementation defined.
