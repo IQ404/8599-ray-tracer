@@ -1353,7 +1353,7 @@ inline double degrees_to_radians(double degrees)
 inline double random_real_number()	// returns value in [0,1)
 // Note that we want to exclude 1
 {
-	// TODO: ??? How to randomize the seed? (We probably don't want to use std::time since this is aiming for a real-time application)
+	// TODO: ??? How to randomize the seed? (We probably don't want to use std::time since we are aiming for a real-time application)
 
 	/*
 	Note that the value of RAND_MAX is implementation defined.
