@@ -1371,6 +1371,7 @@ inline double random_real_number(double min, double max)	// returns value in [mi
 
 inline double clamp(double r, double min, double max)
 {
+	assert(min <= max);
 	if (r < min)
 	{
 		return min;
