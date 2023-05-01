@@ -1394,4 +1394,14 @@ inline double clamp(double r, double min, double max)
 
 ### May 1st 2023
 
-- Create the `Camera` class
+- Create the `Camera` class:
+
+```cpp
+
+```
+
+- Implementing basic MSAA:
+
+```cpp
+
+```
