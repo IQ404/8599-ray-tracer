@@ -1660,9 +1660,9 @@ void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_pixel)
 #endif // !COLOR_H
 ```
 
-For  `sampling rate == 1` where the ray shoots at the center of the pixel:
+For  `sampling rate == 1` where the ray shoots at the center of the pixel, the output shows:
 
-For  `sampling rate == 4`:
+For  `sampling rate == 4`, the output shows:
 
-For  `sampling rate == 100`:
+For  `sampling rate == 100`, the output shows:
 
