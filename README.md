@@ -2073,7 +2073,7 @@ int main()
 
 The output is as follows:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1.jpg" width="600" height="450"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1.jpg" width="550" height="450"></a>
 
 - Apply basic Gamma Correction
 
