@@ -2075,11 +2075,12 @@ int main()
 
 For `gamma == 2`:
 
-
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G2.jpg" width="600" height="300"></a>
 
 For `gamma == 3`:
 
-
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G3.jpg" width="600" height="300"></a>
 
 For `gamma == 4`:
 
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G4.jpg" width="600" height="300"></a>
