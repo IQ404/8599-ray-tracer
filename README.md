@@ -1674,4 +1674,6 @@ For  `sampling rate == 100`, the output shows:
 
 ### May 2nd 2023
 
-- 
+- A basic diffuse material model
+  
+  - The reflection direction is randomized.
