@@ -1662,11 +1662,11 @@ void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_pixel)
 
 For  `sampling rate == 1` (i.e. no antialiasing) where the ray shoots at the center of the pixel, the output shows:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx1.jpg" width="1000" height="560"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx1.jpg" width="800" height="460"></a>
 
 For  `sampling rate == 4`, the output shows:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx4.jpg" width="1000" height="560"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx4.jpg" width="800" height="460"></a>
 
 For  `sampling rate == 100`, the output shows:
 
