@@ -1670,7 +1670,7 @@ For  `sampling rate == 4`, the output shows:
 
 For  `sampling rate == 100`, the output shows:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx100.jpg" width="600" height="360"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/MSAAx100.jpg" width="800" height="460"></a>
 
 ### May 2nd 2023
 
