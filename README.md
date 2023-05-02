@@ -2070,3 +2070,16 @@ int main()
 	std::cerr << "\nIt took " << elapsed.count() << " milliseconds.\n";
 }
 ```
+
+- Apply basic Gamma Correction
+
+For `gamma == 2`:
+
+
+
+For `gamma == 3`:
+
+
+
+For `gamma == 4`:
+
