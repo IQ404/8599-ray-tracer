@@ -2089,6 +2089,8 @@ For `gamma == 4`:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G4.jpg" width="540" height="300"></a>
 
+### May 3rd 2023
+
 - Fix shadow acne
 
 // TODO: write notes here
