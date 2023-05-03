@@ -2088,3 +2088,19 @@ For `gamma == 3`:
 For `gamma == 4`:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G4.jpg" width="540" height="300"></a>
+
+- Fix shadow acne
+
+// TODO: write notes here
+
+If we starts intersection detection at `0.0` (i.e. with shadow ance): (`gamma == 2`)
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/WithShadowAcne.jpg" width="540" height="300"></a>
+
+If we starts intersection detection at `0.001` (i.e. without shadow ance): (`gamma == 2`)
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/WithoutShadowAcne.jpg" width="540" height="300"></a>
+
+Note that, since the ray "eaten" by the surface will be likely to bounce many times inside the sphere, heal shadow acne is also benefical to performance:
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/ShadowAcneImpactOnPerformance.jpg" width="540" height="300"></a>
