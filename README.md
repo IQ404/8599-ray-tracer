@@ -2119,12 +2119,12 @@ Note that, since the ray "eaten" by the surface will be likely to bounce many ti
 
 The output using IN-sphere model:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/InSphere.jpg" width="540" height="280"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/InSphere.jpg" width="540" height="300"></a>
 
 The output using ON-sphere model:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/OnSphere.jpg" width="540" height="280"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/OnSphere.jpg" width="540" height="300"></a>
 
 The output using IN-hemisphere model:
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/InHemiSphere.jpg" width="540" height="280"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/InHemiSphere.jpg" width="540" height="300"></a>
