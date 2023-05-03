@@ -2105,11 +2105,11 @@ If we starts intersection detection at `0.001` (i.e. without shadow ance): (`gam
 
 If we starts intersection detection at `0.0` (i.e. with shadow ance): (`gamma == 1`)
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1WithShadowAcne.jpg" width="540" height="420"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1WithShadowAcne.jpg" width="540" height="400"></a>
 
 If we starts intersection detection at `0.001` (i.e. without shadow ance): (`gamma == 1`)
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1WithoutShadowAcne.jpg" width="540" height="420"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/G1WithoutShadowAcne.jpg" width="540" height="400"></a>
 
 Note that, since the ray "eaten" by the surface will be likely to bounce many times inside the sphere, healing shadow acne is also benefical to performance:
 
