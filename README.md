@@ -2643,3 +2643,5 @@ inline void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_
 
 ### May 4th 2023
 
+- Create abstraction for materials
+
