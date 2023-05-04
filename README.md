@@ -2149,7 +2149,7 @@ The current code becomes:
 // ---------------------------Control Panel---------------------------
 #define Multithread 1				// 0 or 1
 #define Antialiasing 1				// 0 or 1, currently only supports MSAA
-#define GammaCorrection 2			// Give the value of gamma here, currently only supports 1,2,3,4, other number provided is treated as 1 (i.e. no gamma correction)
+#define GammaCorrection 2			// Give the value of gamma here (reminder: 1 means no gamma correction)
 #define ShadowAcneElimination 1		// 0 or 1
 #define DiffuseMode 2				// 0: IN-sphere; 1: ON-sphere; 2: IN-hemisphere
 // -------------------------------------------------------------------
@@ -2611,29 +2611,9 @@ inline void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_
 	// ??? Explain why the 0.999 can be necessary.
 	// ??? What is the difference if static_cast<int>() is used instead of int()?
 
-	switch (gamma)
-	{
-	case 2:
-		os << round_real_to_int(255 * clamp(std::sqrt(pixel_color.x() / samples_per_pixel), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::sqrt(pixel_color.y() / samples_per_pixel), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::sqrt(pixel_color.z() / samples_per_pixel), 0.0, 1.0)) << '\n';
-		break;
-	case 3:
-		os << round_real_to_int(255 * clamp(std::cbrt(pixel_color.x() / samples_per_pixel), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::cbrt(pixel_color.y() / samples_per_pixel), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::cbrt(pixel_color.z() / samples_per_pixel), 0.0, 1.0)) << '\n';
-		break;
-	case 4:
-		os << round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.x() / samples_per_pixel)), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.y() / samples_per_pixel)), 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.z() / samples_per_pixel)), 0.0, 1.0)) << '\n';
-		break;
-	default:
-		os << round_real_to_int(255 * clamp(pixel_color.x() / samples_per_pixel, 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(pixel_color.y() / samples_per_pixel, 0.0, 1.0)) << ' '
-			<< round_real_to_int(255 * clamp(pixel_color.z() / samples_per_pixel, 0.0, 1.0)) << '\n';
-		break;
-	}
+	os << round_real_to_int(255 * clamp(std::pow(pixel_color.x() / samples_per_pixel, 1.0 / gamma), 0.0, 1.0)) << ' '
+		<< round_real_to_int(255 * clamp(std::pow(pixel_color.y() / samples_per_pixel, 1.0 / gamma), 0.0, 1.0)) << ' '
+		<< round_real_to_int(255 * clamp(std::pow(pixel_color.z() / samples_per_pixel, 1.0 / gamma), 0.0, 1.0)) << '\n';
 	
 	// ??? Why in the first place we need gamma correction?
 }
