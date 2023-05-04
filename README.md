@@ -2129,5 +2129,517 @@ The output using IN-hemisphere model:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/InHemiSphere.jpg" width="540" height="300"></a>
 
+The current code becomes:
+
+```cpp
+/*****************************************************************//**
+ * \file   main.cpp
+ * \brief  The renderer for 8599 ray tracer
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+ /*
+ Note:
+	PPM image can be viewed by** Portable Anymap Viewer** on Windows.
+ 
+ */  
+
+// ---------------------------Control Panel---------------------------
+#define Multithread 1				// 0 or 1
+#define Antialiasing 1				// 0 or 1, currently only supports MSAA
+#define GammaCorrection 2			// Give the value of gamma here, currently only supports 1,2,3,4, other number provided is treated as 1 (i.e. no gamma correction)
+#define ShadowAcneElimination 1		// 0 or 1
+#define DiffuseMode 2				// 0: IN-sphere; 1: ON-sphere; 2: IN-hemisphere
+// -------------------------------------------------------------------
+
+#include <iostream>
+#include <vector>
+#include <chrono>		// for benchmark
+#include <execution>	// for multi-threading
+
+#include "RayTracingToolbox.h"
+
+#include "color.h"
+#include "CompositeHittable.h"
+#include "Sphere.h"
+#include "Camera.h"
+
+
+ColorRGB ray_color(const Ray& ray, const Hittable& world, const int bounce_depth)
+{
+	if (bounce_depth <= 0)
+	{
+		return ColorRGB{ 0.0,0.0,0.0 };		// representing no light
+	}
+
+	HitRecord record;
+
+#if ShadowAcneElimination
+	double starting_at = 0.001;
+	// We starts the ray a little bit forward from the ideal hitting point because, due to floating point precision, the calculated hitting point may not be exactly on the surface
+	// This fixs the shadow acne, and is also benefical to performance.
+#else
+	double starting_at = 0.0;
+#endif
+
+	if (world.is_hit_by(ray, starting_at, positive_infinity, record))
+	{
+#if DiffuseMode == 0
+		Point3D target = record.point + record.normal + random_in_unit_sphere();
+#elif DiffuseMode == 1
+		Point3D target = record.point + record.normal + random_unit_vector();	// ??? Explain why this (Lambertian) model is the most accurate one.
+#elif DiffuseMode == 2
+		Point3D target = record.point + random_in_unit_hemisphere(record.normal);	// Note: this is equivalent to ON-hemisphere
+#endif // DiffuseMode
+		// Energy reduced by half for each bounce
+		return 0.5 * ray_color(Ray{ record.point, target - record.point }, world, bounce_depth - 1);
+		// recall that record.normal is computed to be always on the reflection side
+	}
+
+	// Not hitting anything: render the sky
+	double interpolation_factor = 0.5 * (unit_vector(ray.direction()).y() + 1.0);	// Normalized to [0,1]
+	return (1.0 - interpolation_factor) * ColorRGB { 1.0, 1.0, 1.0 } + interpolation_factor * ColorRGB{ 0.5,0.7,1.0 };
+}
+
+int main()
+{
+	// Parameters of output image:
+	const double aspect_ratio = 16.0 / 9.0;		// x/y
+	const int image_width = 400;
+	const int image_height = int(image_width / aspect_ratio);	// ??? use static_cast<int>()?
+#if Antialiasing
+	const int samples_per_pixel = 100;		// for MSAA
+#else
+	const int samples_per_pixel = 1;		// for MSAA
+#endif // Antialiasing
+	const int max_bounce_depth = 50;
+#if GammaCorrection == 2
+	const int gamma = 2;
+#elif GammaCorrection == 3
+	const int gamma = 3;
+#elif GammaCorrection == 4
+	const int gamma = 4;
+#else
+	const int gamma = 1;
+#endif // GammaCorrection
+
+
+	// Color Settings:
+	const int max_color = 255;
+
+	// Creating the (objects in the) world:
+	CompositeHittable world;	// empty world
+	world.add(std::make_shared<Sphere>(Point3D{ 0.0, -100.5, -1.0 }, 100.0));	// add the ground
+	world.add(std::make_shared<Sphere>(Point3D{ 0.0, 0.0, -1.0 }, 0.5));	// add a ball on the ground
+
+	// Camera:
+	Camera camera;
+
+	// Rendering (i.e. output data):
+	// (Note that by using > operator in Windows Command Prompt the contents of std::cout can be redirected to a file while the contents of std::cerr remains in the terminal)
+	std::cout << "P3" << '\n'								// colors are in ASCII		(??? Explain the meaning)
+		<< image_width << ' ' << image_height << '\n'		// column  row
+		<< max_color << '\n';								// value for max color
+
+	// Preparations for multi-threading:
+	std::vector<std::vector<ColorRGB>> image;
+	image.resize(image_height);
+	for (auto& row : image)
+	{
+		row.resize(image_width);
+	}
+	std::vector<int> rows(image_height);
+	std::vector<int> columns(image_width);
+	for (int i = 0; i < image_height; i++)
+	{
+		rows[i] = image_height - 1 - i;
+	}
+	for (int j = 0; j < image_width; j++)
+	{
+		columns[j] = j;
+	}
+
+	// benchmark
+	auto start = std::chrono::high_resolution_clock::now();
+	// RGB triplets: (For PPM format: each rgb triplet is rendered as a pixel, from left to right, top to bottom)
+#if Multithread
+	// Multi-threading:
+	std::for_each(std::execution::par, rows.begin(), rows.end(),
+		[&](int row)
+		{
+			std::for_each(std::execution::par, columns.begin(), columns.end(),
+			[&](int column)
+				{
+#if Antialiasing
+					ColorRGB pixel_color;	// (0,0,0)
+					for (int s = 0; s < samples_per_pixel; s++)
+					{
+						double horizontal_offset_factor = (column + random_real_number()) / image_width;
+						double vertical_offset_factor = (row + random_real_number()) / image_height;
+						Ray ray = camera.extract_ray(horizontal_offset_factor, vertical_offset_factor);
+						pixel_color += ray_color(ray, world, max_bounce_depth);
+					}
+					image[image_height - 1 - row][column] = pixel_color;
+#else
+					double horizontal_offset_factor = (column + 0.5) / image_width;
+					double vertical_offset_factor = (row + 0.5) / image_height;
+					Ray ray = camera.extract_ray(horizontal_offset_factor, vertical_offset_factor);
+					ColorRGB pixel_color = ray_color(ray, world, max_bounce_depth);
+					image[image_height - 1 - row][column] = pixel_color;
+#endif // Antialiasing
+				}
+			);
+		}
+	);
+#else
+	// Single threading:
+	for (int row = image_height - 1; row >= 0; row--)
+	{
+		std::cerr << '\r' << "Scanlines Remaining: " << row << ' ' << std::flush;		// ??? Why do we want std::flush here?
+		// Note: \r means writing from the head of the current line
+	
+		for (int column = 0; column < image_width; column++)
+		{
+#if Antialiasing
+			ColorRGB pixel_color;	// (0,0,0)
+			for (int s = 0; s < samples_per_pixel; s++)
+			{
+				double horizontal_offset_factor = (column + random_real_number()) / image_width;
+				double vertical_offset_factor = (row + random_real_number()) / image_height;
+				Ray ray = camera.extract_ray(horizontal_offset_factor, vertical_offset_factor);
+				pixel_color += ray_color(ray, world, max_bounce_depth);
+			}
+			image[image_height - 1 - row][column] = pixel_color;
+#else
+			double horizontal_offset_factor = (column + 0.5) / image_width;
+			double vertical_offset_factor = (row + 0.5) / image_height;
+			Ray ray = camera.extract_ray(horizontal_offset_factor, vertical_offset_factor);
+			ColorRGB pixel_color = ray_color(ray, world, max_bounce_depth);
+			image[image_height - 1 - row][column] = pixel_color;
+#endif // Antialiasing
+		}
+	}
+#endif // Multithread
+	// Output the pixel data:
+	for (const auto& row : image)
+	{
+		for (const auto& pixel_color : row)
+		{
+			write_color(std::cout, pixel_color, samples_per_pixel, gamma);
+		}
+	}
+	// benchmark
+	auto end = std::chrono::high_resolution_clock::now();
+	std::cerr << '\n'
+		<< "Done."
+		<< '\n';
+	// benchmark
+	auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	std::cerr << "\nIt took " << elapsed.count() << " milliseconds.\n";
+}
+```
+
+```cpp
+/*****************************************************************//**
+ * \file   Vector3D.h
+ * \brief  The class of 3D vector for representing geometry in R^3 and RGB color
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef VECTOR3D_H
+#define VECTOR3D_H
+
+#include <iostream>
+#include <cmath>		// to use std::sqrt
+#include <cassert>
+//#define NDEBUG		// uncomment this if we don't want assertion (e.g. when we want things like inf)
+#include "RayTracingToolbox.h"
+
+class Vector3D
+{
+	double v[3];
+
+public:
+
+	// Constructors:
+
+	Vector3D()
+		: v{ 0,0,0 }
+	{
+
+	}
+
+	Vector3D(double x, double y, double z)
+		: v{ x,y,z }
+	{
+
+	}
+
+	// Operators:
+
+	Vector3D operator-() const					// additive inverse
+	{
+		return Vector3D{ -v[0], -v[1], -v[2] };
+	}
+
+	double& operator[](int i)
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	double operator[](int i) const
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	Vector3D& operator+=(const Vector3D& u)
+	{
+		v[0] += u.v[0];
+		v[1] += u.v[1];
+		v[2] += u.v[2];
+
+		return *this;
+	}
+
+	Vector3D& operator*=(const double d)
+	{
+		v[0] *= d;
+		v[1] *= d;
+		v[2] *= d;
+
+		return *this;
+	}
+
+	Vector3D& operator/=(const double d)
+	{
+		assert(d != 0.0);
+
+		v[0] /= d;
+		v[1] /= d;
+		v[2] /= d;
+
+		return *this;
+	}
+
+	// Methods:
+
+	double x() const
+	{
+		return v[0];
+	}
+
+	double y() const
+	{
+		return v[1];
+	}
+
+	double z() const
+	{
+		return v[2];
+	}
+
+	double squared_length() const
+	{
+		return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+	}
+
+	double length() const
+	{
+		return std::sqrt(squared_length());
+	}
+
+	/*
+	C++ side notes: static method can be called without instantiation, (and thus) it cannot depend on any non-static data
+	*/
+
+	inline static Vector3D random()
+	{
+		return Vector3D{ random_real_number(), random_real_number(), random_real_number() };
+	}
+
+	inline static Vector3D random(double min, double max)
+	{
+		return Vector3D{ random_real_number(min,max), random_real_number(min,max), random_real_number(min,max) };
+	}
+};
+
+// Unitility Functions:
+
+inline std::ostream& operator<<(std::ostream& os, const Vector3D& v)
+{
+	return os << v.x() << ' ' << v.y() << ' ' << v.z();
+}
+
+inline Vector3D operator+(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() + b.x(), a.y() + b.y(), a.z() + b.z() };
+}
+
+inline Vector3D operator-(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() - b.x(), a.y() - b.y(), a.z() - b.z() };
+}
+
+inline Vector3D operator*(const Vector3D& a, const Vector3D& b)			// Note that this is NOT dot or cross product!
+{
+	return Vector3D{ a.x() * b.x(), a.y() * b.y(), a.z() * b.z() };
+}
+
+inline Vector3D operator*(double d, const Vector3D& v)
+{
+	return Vector3D{ d * v.x(), d * v.y(), d * v.z() };
+}
+
+inline Vector3D operator*(const Vector3D& v, double d)
+{
+	return d * v;
+}
+
+inline Vector3D operator/(const Vector3D& v, double d)
+{
+	return (1 / d) * v;
+}
+
+inline double dot(const Vector3D& a, const Vector3D& b)
+{
+	return a.x() * b.x() + a.y() * b.y() + a.z() * b.z();
+}
+
+inline Vector3D cross(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D
+	{
+		a.y() * b.z() - a.z() * b.y(),
+		a.z() * b.x() - a.x() * b.z(),
+		a.x() * b.y() - a.y() * b.x()
+	};
+}
+
+inline Vector3D unit_vector(const Vector3D& v)
+{
+	return v / v.length();
+}
+
+inline Vector3D random_in_unit_sphere()
+{
+	while (true)
+	{
+		Vector3D p = Vector3D::random(-1, 1);
+		if (p.squared_length() >= 1.0)
+		{
+			continue;
+		}
+		return p;
+	}
+}
+
+inline Vector3D random_unit_vector()
+{
+	return unit_vector(random_in_unit_sphere());
+}
+
+inline Vector3D random_in_unit_hemisphere(const Vector3D& normal)
+{
+	Vector3D p = random_in_unit_sphere();
+	if (dot(p, normal) >= 0.0)		// should we include the == case?
+	{
+		return p;
+	}
+	return -p;
+}
+
+// For better code readability (as Vector3D will represent things with different physical meanings):
+
+using Point3D = Vector3D;
+using ColorRGB = Vector3D;
+
+#endif // !VECTOR3D_H
+```
+
+```cpp
+/*****************************************************************//**
+ * \file   color.h
+ * \brief  Utility Functions for outputting ColorRGB object as pixel
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef COLOR_H
+#define COLOR_H
+
+#include "Vector3D.h"
+#include <cmath>
+#include <iostream>
+
+inline int round_real_to_int(double r)
+{
+	if (r >= 0.0)
+	{
+		if (r - int(r) >= 0.5)
+		{
+			return int(r) + 1;
+		}
+		return int(r);
+	}
+	if (int(r) - r >= 0.5)
+	{
+		return int(r) - 1;
+	}
+	return int(r);
+}
+
+inline void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_pixel, int gamma)
+{
+	// Assume the rgb component values of colorRGB for each sample is in range [0.0, 1.0], and the output integer value is in range [0, 255].
+	// Assume the rgb component values of colorRGB is the sum of all the samples
+
+	/*double r = pixel_color.x() / samples_per_pixel;
+	double g = pixel_color.y() / samples_per_pixel;
+	double b = pixel_color.z() / samples_per_pixel;
+
+	os << int(256 * clamp(r, 0.0, 0.999)) << ' '
+		<< int(256 * clamp(g, 0.0, 0.999)) << ' '
+		<< int(256 * clamp(b, 0.0, 0.999)) << '\n';*/
+
+	// ??? Explain why the 0.999 can be necessary.
+	// ??? What is the difference if static_cast<int>() is used instead of int()?
+
+	switch (gamma)
+	{
+	case 2:
+		os << round_real_to_int(255 * clamp(std::sqrt(pixel_color.x() / samples_per_pixel), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::sqrt(pixel_color.y() / samples_per_pixel), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::sqrt(pixel_color.z() / samples_per_pixel), 0.0, 1.0)) << '\n';
+		break;
+	case 3:
+		os << round_real_to_int(255 * clamp(std::cbrt(pixel_color.x() / samples_per_pixel), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::cbrt(pixel_color.y() / samples_per_pixel), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::cbrt(pixel_color.z() / samples_per_pixel), 0.0, 1.0)) << '\n';
+		break;
+	case 4:
+		os << round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.x() / samples_per_pixel)), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.y() / samples_per_pixel)), 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(std::sqrt(std::sqrt(pixel_color.z() / samples_per_pixel)), 0.0, 1.0)) << '\n';
+		break;
+	default:
+		os << round_real_to_int(255 * clamp(pixel_color.x() / samples_per_pixel, 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(pixel_color.y() / samples_per_pixel, 0.0, 1.0)) << ' '
+			<< round_real_to_int(255 * clamp(pixel_color.z() / samples_per_pixel, 0.0, 1.0)) << '\n';
+		break;
+	}
+	
+	// ??? Why in the first place we need gamma correction?
+}
+
+#endif // !COLOR_H
+```
+
 ### May 4th 2023
 
