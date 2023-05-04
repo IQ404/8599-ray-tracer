@@ -2638,3 +2638,10 @@ The output is as follows: (`1200*675`, `gamma == 1`)
 The output is as follows: (`1200*675`, `gamma == 2`)
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FuzzyMetal.jpg" width="540" height="300"></a>
+
+### May 5th 2023
+
+I decided to just play around with the existing code for the day. :P
+
+### May 6th 2023
+
