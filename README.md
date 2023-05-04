@@ -2625,3 +2625,16 @@ inline void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_
 
 - Create abstraction for materials
 
+- Clean up the code for diffuse materials
+
+- Implement smooth metal
+
+The output is as follows: (`1200*675`, `gamma == 1`)
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/SmoothMetal.jpg" width="540" height="300"></a>
+
+- Implement fuzzy metal
+
+The output is as follows: (`1200*675`, `gamma == 2`)
+
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FuzzyMetal.jpg" width="540" height="300"></a>
