@@ -2641,7 +2641,7 @@ The output is as follows: (`1200*675`, `gamma == 2`)
 
 ### May 5th 2023
 
-I decided to just play around with the existing code for the day.
+I decided to just play around with the existing code and do some documentation for the day.
 
 :P
 
