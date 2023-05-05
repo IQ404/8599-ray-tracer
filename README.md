@@ -3338,7 +3338,7 @@ An example output is as follows: (`fuzziness == 0.3` for the sphere in the left,
 
 I decided to just play around with the existing code and do some documentation for the day.
 
-:P
+Oh and also I playered with the [Walnut](https://github.com/TheCherno/WalnutAppTemplate).
 
 ### May 6th 2023
 
