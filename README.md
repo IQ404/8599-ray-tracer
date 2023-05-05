@@ -2623,19 +2623,498 @@ inline void write_color(std::ostream& os, ColorRGB pixel_color, int samples_per_
 
 ### May 4th 2023
 
+- Adding more utility functions into the `Vector3D` class:
+
+```cpp
+/*****************************************************************//**
+ * \file   Vector3D.h
+ * \brief  The class of 3D vector for representing geometry in R^3 and RGB color
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef VECTOR3D_H
+#define VECTOR3D_H
+
+#include <iostream>
+#include <cmath>		// to use std::sqrt
+#include <cassert>
+//#define NDEBUG		// uncomment this if we don't want assertion (e.g. when we want things like inf)
+#include "RayTracingToolbox.h"
+
+class Vector3D
+{
+	double v[3];
+
+public:
+
+	// Constructors:
+
+	Vector3D()
+		: v{ 0,0,0 }
+	{
+
+	}
+
+	Vector3D(double x, double y, double z)
+		: v{ x,y,z }
+	{
+
+	}
+
+	// Operators:
+
+	Vector3D operator-() const					// additive inverse
+	{
+		return Vector3D{ -v[0], -v[1], -v[2] };
+	}
+
+	double& operator[](int i)
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	double operator[](int i) const
+	{
+		assert(i == 0 || i == 1 || i == 2);
+		return v[i];
+	}
+
+	Vector3D& operator+=(const Vector3D& u)
+	{
+		v[0] += u.v[0];
+		v[1] += u.v[1];
+		v[2] += u.v[2];
+
+		return *this;
+	}
+
+	Vector3D& operator*=(const double d)
+	{
+		v[0] *= d;
+		v[1] *= d;
+		v[2] *= d;
+
+		return *this;
+	}
+
+	Vector3D& operator/=(const double d)
+	{
+		assert(d != 0.0);
+
+		v[0] /= d;
+		v[1] /= d;
+		v[2] /= d;
+
+		return *this;
+	}
+
+	// Methods:
+
+	double x() const
+	{
+		return v[0];
+	}
+
+	double y() const
+	{
+		return v[1];
+	}
+
+	double z() const
+	{
+		return v[2];
+	}
+
+	double squared_length() const
+	{
+		return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+	}
+
+	double length() const
+	{
+		return std::sqrt(squared_length());
+	}
+
+	/*
+	C++ side notes: static method can be called without instantiation, (and thus) it cannot depend on any non-static data
+	*/
+
+	inline static Vector3D random()
+	{
+		return Vector3D{ random_real_number(), random_real_number(), random_real_number() };
+	}
+
+	inline static Vector3D random(double min, double max)
+	{
+		return Vector3D{ random_real_number(min,max), random_real_number(min,max), random_real_number(min,max) };
+	}
+
+	bool near_zero() const
+	{
+		static const double minimum = 1e-8;
+		return ((std::fabs(v[0] < minimum)) && (std::fabs(v[1] < minimum)) && (std::fabs(v[2] < minimum)));
+		// C++ side note: fabs() is the floating point number version of abs()
+	}
+};
+
+// Unitility Functions:
+
+inline std::ostream& operator<<(std::ostream& os, const Vector3D& v)
+{
+	return os << v.x() << ' ' << v.y() << ' ' << v.z();
+}
+
+inline Vector3D operator+(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() + b.x(), a.y() + b.y(), a.z() + b.z() };
+}
+
+inline Vector3D operator-(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D{ a.x() - b.x(), a.y() - b.y(), a.z() - b.z() };
+}
+
+inline Vector3D operator*(const Vector3D& a, const Vector3D& b)			// Note that this is NOT dot or cross product!
+{
+	return Vector3D{ a.x() * b.x(), a.y() * b.y(), a.z() * b.z() };
+}
+
+inline Vector3D operator*(double d, const Vector3D& v)
+{
+	return Vector3D{ d * v.x(), d * v.y(), d * v.z() };
+}
+
+inline Vector3D operator*(const Vector3D& v, double d)
+{
+	return d * v;
+}
+
+inline Vector3D operator/(const Vector3D& v, double d)
+{
+	return (1 / d) * v;
+}
+
+inline double dot(const Vector3D& a, const Vector3D& b)
+{
+	return a.x() * b.x() + a.y() * b.y() + a.z() * b.z();
+}
+
+inline Vector3D cross(const Vector3D& a, const Vector3D& b)
+{
+	return Vector3D
+	{
+		a.y() * b.z() - a.z() * b.y(),
+		a.z() * b.x() - a.x() * b.z(),
+		a.x() * b.y() - a.y() * b.x()
+	};
+}
+
+inline Vector3D unit_vector(const Vector3D& v)
+{
+	return v / v.length();
+}
+
+inline Vector3D random_in_unit_sphere()
+{
+	while (true)
+	{
+		Vector3D p = Vector3D::random(-1, 1);
+		if (p.squared_length() >= 1.0)
+		{
+			continue;
+		}
+		return p;
+	}
+}
+
+inline Vector3D random_unit_vector()
+{
+	return unit_vector(random_in_unit_sphere());
+}
+
+inline Vector3D random_in_unit_hemisphere(const Vector3D& normal)
+{
+	Vector3D p = random_in_unit_sphere();
+	if (dot(p, normal) >= 0.0)		// should we include the == case?
+	{
+		return p;
+	}
+	return -p;
+}
+
+inline Vector3D Direction_of_Mirror_reflection(const Vector3D& incident_direction, const Vector3D& normal)
+{
+	return incident_direction - 2.0 * dot(incident_direction, normal) * normal;
+}
+
+// For better code readability (as Vector3D will represent things with different physical meanings):
+
+using Point3D = Vector3D;
+using ColorRGB = Vector3D;
+
+#endif // !VECTOR3D_H
+```
+
 - Create abstraction for materials
+
+```cpp
+/*****************************************************************//**
+ * \file   Material.h
+ * \brief  The abstract class for materials
+ * 
+ * \author Xiaoyang Liu
+ * \date   May 2023
+ *********************************************************************/
+
+#ifndef MATERIAL_H
+#define MATERIAL_H
+
+#include "RayTracingToolbox.h"
+
+class HitRecord;
+
+class Material
+{
+public:
+	virtual bool scatter(const Ray& incident_ray, const HitRecord& record, Vector3D& attenuation, Ray& scattered_ray) const = 0;
+};
+
+#endif // !MATERIAL_H
+```
+
+```cpp
+/*****************************************************************//**
+ * \file   HitRecord.h
+ * \brief  The data structure used to (temporarily) store related information when a ray hits on an entity
+ * 
+ * \author Xiaoyang Liu
+ * \date   May 2023
+ *********************************************************************/
+
+#ifndef HITRECORD_H
+#define HITRECORD_H
+
+#include "RayTracingToolbox.h"
+
+class Material;
+
+struct HitRecord		// ??? How is HitRecord useful as it does not record the information about the ray?
+{
+	std::shared_ptr<Material> material_pointer;
+	Point3D point;
+	Vector3D normal;
+	double t;
+	bool is_hitting_front_face;
+
+	// Assume for any geometric entity rendered by this ray tracer, there is a defined front face (and thus a back face) and thus a front (i.e. outward) normal. (??? What about Klein bottle/ring?)
+	// We choose to set the normal to always towards the ray:
+	inline void set_normal(const Ray& ray, const Vector3D& outward_normal)		// Setting the normal and the front-back bool
+	// ??? Isn't in-class method implicitly inlined? Can we delete the explicit inline keyword?
+	{
+		is_hitting_front_face = (dot(ray.direction(), outward_normal) < 0.0);	// Note: Hitting at right angle is counted as hitting from outside
+		normal = is_hitting_front_face ? (outward_normal) : (-outward_normal);
+	}
+};
+
+#endif // !HITRECORD_H
+```
+
+```cpp
+/*****************************************************************//**
+ * \file   Sphere.h
+ * \brief  Class declaration for ray-hittable sphere
+ * 
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#ifndef SPHERE_H
+#define SPHERE_H
+
+#include "Hittable.h"
+
+/*
+C++ side note:
+If we don't provide class access specifier in inheritance,
+it would be public if the sub-class is declared as struct and be private if the sub-class is declared as class
+*/
+
+class Sphere : public Hittable
+{
+	Point3D center;
+	double radius;
+	std::shared_ptr<Material> material_pointer;
+
+public:
+
+	Sphere()	// currently, radius is uninitialized! what default value should we set?
+	{
+
+	}
+
+	Sphere(Point3D centre, double r, std::shared_ptr<Material> material)
+		: center{ centre }, radius{ r }, material_pointer{ material }
+	{
+
+	}
+
+	virtual bool is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const override;
+};
+
+#endif // !SPHERE_H
+```
+
+```cpp
+/*****************************************************************//**
+ * \file   Sphere.cpp
+ * \brief  Class definition for ray-hittable sphere
+ *
+ * \author Xiaoyang Liu
+ * \date   April 2023
+ *********************************************************************/
+
+#include "Sphere.h"
+
+// Side-note: virtual keyword is not needed AND not allowed to be outside a class declaration, and thus for a virtual function defintion outside the class we also can declare it with override
+
+bool Sphere::is_hit_by(const Ray& ray, double t_min, double t_max, HitRecord& record) const
+{
+	Vector3D sphere_factor = ray.origin() - center;
+	double A = ray.direction().squared_length();
+	double half_B = dot(ray.direction(), sphere_factor);
+	double C = sphere_factor.squared_length() - radius * radius;
+	double discriminant = half_B * half_B - A * C;
+
+	if (discriminant < 0.0)		// at this stage, discriminant == 0 case isn't rejected.
+	{
+		return false;
+	}
+
+	double dist = std::sqrt(discriminant);
+	double root = ((-half_B) - dist) / A;	// the "near" root
+	if (root < t_min || t_max < root)
+	{
+		root = ((-half_B) + dist) / A;		// the "far" root
+		if (root < t_min || t_max < root)	// in-range far root is ACCEPTED when near root is rejected
+		{
+			return false;
+		}
+	}
+	// record the intersection:
+	record.t = root;
+	record.point = ray.at(root);
+	record.set_normal(ray, (record.point - center) / radius);	// We decide to let normal be unit vector!!!
+	record.material_pointer = material_pointer;
+
+	return true;
+}
+```
 
 - Clean up the code for diffuse materials
 
+```cpp
+/*****************************************************************//**
+ * \file   Diffuse.h
+ * \brief  Representation for matte materials
+ * 
+ * \author Xiaoyang Liu
+ * \date   May 2023
+ *********************************************************************/
+
+#ifndef DIFFUSE_H
+#define DIFFUSE_H
+
+#include "HitRecord.h"
+#include "Material.h"
+
+class Diffuse : public Material
+{
+	Vector3D albedo;	// for ColorRGB
+
+public:
+
+	Diffuse(const Vector3D& a)
+		: albedo{ a }
+	{
+
+	}
+
+	virtual bool scatter(const Ray& incident_ray, const HitRecord& record, Vector3D& attenuation, Ray& scattered_ray) const override
+	{
+#if DiffuseMode == 0	// IN-Sphere model
+		Vector3D scattering_direction = record.normal + random_in_unit_sphere();
+#elif DiffuseMode == 1	// ON-Sphere (Lambertian) model
+		Vector3D scattering_direction = record.normal + random_unit_vector();	// ??? Explain why this (Lambertian) model is the most accurate one.
+#elif DiffuseMode == 2	// IN-Hemisphere model
+		Vector3D scattering_direction = random_in_unit_hemisphere(record.normal);	// Note: this is equivalent to ON-hemisphere
+#endif // DiffuseMode
+
+		if (scattering_direction.near_zero())
+		{
+			scattering_direction = record.normal;
+		}
+		scattered_ray = Ray{ record.point, scattering_direction };
+		attenuation = albedo;
+
+		return true;
+	}
+};
+
+#endif // !DIFFUSE_H
+```
+
 - Implement smooth metal
+
+```cpp
+/*****************************************************************//**
+ * \file   Metal.h
+ * \brief  Representation for metallic materials
+ * 
+ * \author Xiaoyang Liu
+ * \date   May 2023
+ *********************************************************************/
+
+#ifndef METAL_H
+#define METAL_H
+
+#include "HitRecord.h"
+#include "Material.h"
+
+class Metal : public Material
+{
+	Vector3D albedo;	// for ColorRGB
+	double fuzziness;
+
+public:
+
+	Metal(const Vector3D& a, double f)
+		: albedo{ a }, fuzziness{ f < 1 ? f : 1.0 }
+	{
+
+	}
+
+	virtual bool scatter(const Ray& incident_ray, const HitRecord& record, Vector3D& attenuation, Ray& scattered_ray) const override
+	{
+		Vector3D reflection_direction = Direction_of_Mirror_reflection(unit_vector(incident_ray.direction()), record.normal);
+		scattered_ray = Ray{ record.point, reflection_direction + fuzziness * random_in_unit_sphere()};
+		attenuation = albedo;
+		return (dot(reflection_direction, record.normal) > 0);	// absorb those directions into the surface due to fuzziness (??? Is this physically accurate?)
+	}
+};
+
+#endif // !METAL_H
+```
 
 The output is as follows: (`1200*675`, `gamma == 1`)
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/SmoothMetal.jpg" width="540" height="300"></a>
 
-- Implement fuzzy metal
+- For fuzzy metal, we just change the fuzziness to a positive value.
 
-The output is as follows: (`1200*675`, `gamma == 2`)
+An example output is as follows: (`1200*675`, `gamma == 2`)
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/FuzzyMetal.jpg" width="540" height="300"></a>
 
