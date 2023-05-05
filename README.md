@@ -2,6 +2,10 @@
 
 This repository aims to record a path tracer that I am currently writing for my MSc module CSC8599.
 
+## Related Repositories
+
+- [8599-ray-tracer-with-walnut-gui](https://github.com/IQ404/8599-ray-tracer-with-walnut-gui)
+
 ## Objectives:
 
 - Prototype an offine path tracer.
