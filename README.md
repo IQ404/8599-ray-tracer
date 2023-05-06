@@ -3346,3 +3346,5 @@ Oh and also I playered with the [Walnut](https://github.com/TheCherno/WalnutAppT
 
 ### May 6th 2023
 
+- Implementing dielectric materials (materials that can refract rays)
+
