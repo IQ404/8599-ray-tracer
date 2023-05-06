@@ -3874,3 +3874,4 @@ int main()
 
 A snapshot of the output is as follows:
 
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/SolidDielectric.jpg" width="650" height="600"></a>
