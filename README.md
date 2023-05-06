@@ -3674,7 +3674,7 @@ With the current `main.cpp`:
 // ---------------------------Control Panel---------------------------
 #define Multithread 1				// 0 or 1
 #define Antialiasing 1				// 0 or 1, currently only supports MSAA
-#define GammaCorrection 1			// 0 or 1
+#define GammaCorrection 0			// 0 or 1
 #define ShadowAcneElimination 1		// 0 or 1
 #define DiffuseMode 1				// 0: IN-sphere; 1: ON-sphere; 2: IN-hemisphere
 // -------------------------------------------------------------------
