@@ -3875,3 +3875,10 @@ int main()
 A snapshot of the output is as follows:
 
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/SolidDielectric.jpg" width="580" height="400"></a>
+
+### May 7th 2023
+
+- Adding bubble(s) in dielectric
+
+<img src="" width="580" height="400"></a>
+
