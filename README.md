@@ -3880,5 +3880,5 @@ A snapshot of the output is as follows:
 
 - Adding bubble(s) in dielectric
 
-<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/air_bubble_in_dielectric_sphere.jpg" width="580" height="400"></a>
+<img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/air_bubble_in_dielectric_sphere.jpg" width="620" height="400"></a>
 
