@@ -3880,5 +3880,9 @@ A snapshot of the output is as follows:
 
 - Adding bubble(s) in dielectric
 
+If we (deliberately) pass a negative value into the radius, we will have `is_hitting_front_face == false` when the ray is hitting toward the negative-radius sphere, and have `is_hitting_front_face == true` when the ray is escaping the negative-radius sphere. Now, if this negative-radius sphere is put inside a normal sphere with positive radius, this negative-radius sphere will be acted as an air bubble (hollow) inside the normal sphere.
+
+An example output is as follows:
+
 <img src="https://github.com/IQ404/8599-ray-tracer/blob/main/Sample%20Images/air_bubble_in_dielectric_sphere.jpg" width="620" height="400"></a>
 
