@@ -4527,8 +4527,8 @@ int main()
 }
 ```
 
-### May 10th 2023
+### May 11th 2023
 
-I will be travlling to Edinburgh and will be back on May 11th 2023.
+I will be travlling to Edinburgh and will be back on May 12th 2023.
 
 The prototype of an offline ray tracer is almost done, except there is a serious "shadow edge" bug I need to fix.
