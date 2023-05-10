@@ -4220,7 +4220,7 @@ public:
 #endif // !CAMERA_H
 ```
 
-### May 9th 2023
+### May 10th 2023
 
 - Implement depth-of-field (defocus blur)
 
