@@ -4532,3 +4532,5 @@ int main()
 I will be travlling to Edinburgh and will be back on May 12th 2023.
 
 The prototype of an offline ray tracer is almost done, except that there is a serious "shadow edge" bug I need to fix.
+
+Update: The bug is fixed.
