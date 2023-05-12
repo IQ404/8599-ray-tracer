@@ -11,9 +11,9 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 - Prototype an offine path tracer.
   
-  <ins>Possible references</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+  <ins>References</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
-  **Estimated date of completion:** no later than <ins>15th May 2023</ins>
+  **Estimated date of completion:** ☑️
 
 - Improve the ray-tracer by adding more advanced features to it.
   
