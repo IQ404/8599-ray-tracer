@@ -29,7 +29,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 - Try to accelerate the path tracer by running code on GPU.
   
-  <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), VK_NV_ray_tracing
+  <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), [Vulkan](https://github.com/GPSnoopy/RayTracingInVulkan)
   
   **Estimated date of completion:** The deadline of this module (CSC8599) is <ins>22nd August 2023</ins>, efforts on implementing GPU accelerations should cease no earlier than this date.
 
