@@ -4533,4 +4533,25 @@ I will be travlling to Edinburgh and will be back on May 12th 2023.
 
 The prototype of an offline ray tracer is almost done, except that there is a serious "shadow edge" bug I need to fix.
 
-Update: The bug is fixed.
+Update: The bug is fixed. In `Vector3D.h`, please change
+
+```cpp
+bool near_zero() const
+    {
+        static const double minimum = 1e-8;
+        return ((std::fabs(v[0] < minimum)) && (std::fabs(v[1] < minimum)) && (std::fabs(v[2] < minimum)));
+    }
+```
+
+to
+
+```cpp
+bool near_zero() const
+    {
+        static const double minimum = 1e-8;
+        return ((std::fabs(v[0]) < minimum) && (std::fabs(v[1]) < minimum) && (std::fabs(v[2]) < minimum));
+    }
+```
+
+### May 12th 2023
+
