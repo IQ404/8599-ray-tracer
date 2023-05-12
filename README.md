@@ -15,17 +15,17 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   **Estimated date of completion:** Completed.
 
-- Improve the ray-tracer by adding more advanced features to it.
-  
-  <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html)
-  
-  **Estimated date of completion:** <ins>early July 2023</ins>
-
 - Optimize the path tracer (from the CPU side, e.g. multithreading) and integrate its output into an interactive GUI. Try to achieve >= 10 fps for a scene that contains a relatively small number of items, a relatively low sampling rate and a relatively low resolution, so that we don't need to sacrifice the advanced features as much as possible.
 
   <ins>Possible references</ins>: [the series by The Cherno](https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl&index=1), [Walnut GUI by The Cherno](https://github.com/TheCherno/Walnut), [Futhark](https://github.com/athas/raytracinginoneweekendinfuthark), [boksajak](https://github.com/boksajak/raytracingthenextweek)
   
   **Estimated date of completion:** optimization should be ongoing indefinitely. But the first complete version of the ray tracer running in real-time is aiming to be finished by the <ins>end of May 2023</ins>
+
+- Improve the ray-tracer by adding more advanced features to it.
+  
+  <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html)), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
+  
+  **Estimated date of completion:** <ins>early July 2023</ins>
 
 - Try to accelerate the path tracer by running code on GPU.
   
