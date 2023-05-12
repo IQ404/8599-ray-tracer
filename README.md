@@ -13,7 +13,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   <ins>References</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
-  **Estimated date of completion:** Completed.
+  **Estimated date of completion:** Completed. :heavy_check_mark:
 
 - Optimize the path tracer (from the CPU side, e.g. multithreading) and integrate its output into an interactive GUI. Try to achieve >= 10 fps for a scene that contains a relatively small number of items, a relatively low sampling rate and a relatively low resolution, so that we don't need to sacrifice the advanced features as much as possible.
 
