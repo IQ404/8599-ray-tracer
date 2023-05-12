@@ -25,7 +25,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html)), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
   
-  **Estimated date of completion:** <ins>early July 2023</ins>
+  **Estimated date of completion:** I'm still thinking about what "advanced" features am I aiming for. Say, if it's features like motion blur, it should not take too long, but if it's modern techniques on denoising, it may then takes me quite a long time to read recent papers.
 
 - Try to accelerate the path tracer by running code on GPU.
   
