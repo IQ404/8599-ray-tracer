@@ -9,7 +9,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 ## Objectives:
 
-- Prototype an offine path tracer.
+- Prototype an offine ray tracer.
   
   <ins>References</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
@@ -41,7 +41,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 ## Progression
 
-- 
+- [An offine ray tracer prototype](https://github.com/IQ404/8599-ray-tracer-prototype/blob/main/README.md)
 
 ### May 12th 2023
 
