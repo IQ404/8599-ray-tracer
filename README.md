@@ -42,6 +42,4 @@ This repository aims to record a path tracer that I am currently writing for my 
 ## Progression
 
 - [An offine ray tracer prototype](https://github.com/IQ404/8599-ray-tracer-prototype/blob/main/README.md)
-
-### May 12th 2023
-
+- [Integrating the ray tracer with the Walnut GUI](https://github.com/IQ404/8599-ray-tracer-with-walnut-gui/blob/master/README.md)
