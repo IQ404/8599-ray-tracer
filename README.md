@@ -13,7 +13,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   <ins>References</ins>: [the book by Peter Shirley](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
   
-  **Estimated date of completion:** ☑️
+  **Estimated date of completion:** Completed.
 
 - Improve the ray-tracer by adding more advanced features to it.
   
