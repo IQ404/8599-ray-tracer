@@ -25,7 +25,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   
   <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html)), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
   
-  **Estimated date of completion:** I'm still thinking about what "advanced" features am I aiming for. Say, if it's features like motion blur, it should not take too long, but if it's modern techniques on denoising, it may then take me relatively a long time to read and implement recent papers. <ins>Currently I prefer the latter because that is more crucial to my PhD proposal. If so, it is possible that I may not have time to do GPU acceleration for this ray tracer and I will postpone learning vulkan until I start my PhD.</ins>
+  **Estimated date of completion:** I'm still thinking about what "advanced" features am I aiming for. Say, if it's features like motion blur, it should not take too long, but if it's modern techniques on denoising, it may then take me relatively a long time to read and implement recent papers.
 
 - If time allows, try to accelerate the path tracer by running code on GPU.
   
