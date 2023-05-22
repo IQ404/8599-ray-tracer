@@ -4,8 +4,8 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 ## Related Repositories
 
-- [8599-ray-tracer-prototype](https://github.com/IQ404/8599-ray-tracer-prototype)
-- [8599-ray-tracer-with-walnut-gui](https://github.com/IQ404/8599-ray-tracer-gui)
+- [The offline prototype of the 8599 ray tracer](https://github.com/IQ404/8599-ray-tracer-prototype)
+- [8599 ray tracer with the Walnut GUI](https://github.com/IQ404/8599-ray-tracer-gui)
 
 ## Objectives:
 
