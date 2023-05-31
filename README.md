@@ -31,13 +31,13 @@ This repository aims to record a path tracer that I am currently writing for my 
 
   **Estimated date of completion:** <ins>15th June 2023</ins>
   
-- Improve the ray-tracer by adding more advanced features to it (currently planning to focus on real time denoising).
+- If I have more time, I will improve the ray-tracer by adding more advanced features to it (currently planning to focus on real time denoising).
   
   <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
   
   **Estimated date of completion:** by the <ins>end of July 2023</ins>
 
-- If I still have time, I will try to accelerate the path tracer by running code on GPU.
+- If I still have more time, I will try to accelerate the path tracer by running code on GPU.
   
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), [Vulkan](https://github.com/GPSnoopy/RayTracingInVulkan)
   
