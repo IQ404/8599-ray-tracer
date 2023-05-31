@@ -27,7 +27,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   - Whitted-Style ray tracing
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
 
-  <ins>Possible references</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
+  <ins>References</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
 
   **Estimated date of completion:** <ins>15th June 2023</ins>
   
