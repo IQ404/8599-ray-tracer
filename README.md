@@ -27,11 +27,13 @@ This repository aims to record a path tracer that I am currently writing for my 
   - Whitted-Style ray tracing
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
 
+  <ins>Possible references</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
+
   **Estimated date of completion:** <ins>15th June 2023</ins>
   
-- Improve the ray-tracer by adding more advanced features to it (currently planning to focus on denoising).
+- Improve the ray-tracer by adding more advanced features to it (currently planning to focus on real time denoising).
   
-  <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html)), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
+  <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
   
   **Estimated date of completion:** by the <ins>end of July 2023</ins>
 
