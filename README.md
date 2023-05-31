@@ -48,8 +48,3 @@ This repository aims to record a path tracer that I am currently writing for my 
 - When developing this project, the code is running on <ins>11980HK</ins> and <ins>RTX3080 (laptop version)</ins>.
 - The code is written in Visual Studio 2022 with C++20.
 - This implementation uses RIGHT-handed coordinate systems.
-
-## Progression
-
-- [An offine ray tracer prototype](https://github.com/IQ404/8599-ray-tracer-prototype/blob/main/README.md) (Finished)
-- [Integrating the ray tracer with the Walnut GUI](https://github.com/IQ404/8599-ray-tracer-with-walnut-gui/blob/master/README.md) (Ongoing...)
