@@ -19,7 +19,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
   <ins>Possible references</ins>: [the series by The Cherno](https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl&index=1), [Walnut GUI by The Cherno](https://github.com/TheCherno/Walnut), [Futhark](https://github.com/athas/raytracinginoneweekendinfuthark), [boksajak](https://github.com/boksajak/raytracingthenextweek)
   
-  **Estimated date of completion:** <ins>15th June 2023</ins>
+  **Estimated date of completion:** Completed. :heavy_check_mark:
 
 - Integrate the offline ray tracer into the interactive GUI renderer framework. Implementing:
 
@@ -27,7 +27,7 @@ This repository aims to record a path tracer that I am currently writing for my 
   - Whitted-Style ray tracing
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
 
-  **Estimated date of completion:** Completed. :heavy_check_mark:
+  **Estimated date of completion:** <ins>15th June 2023</ins>
   
 - Improve the ray-tracer by adding more advanced features to it (currently planning to focus on denoising).
   
