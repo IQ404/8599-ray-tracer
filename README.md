@@ -46,5 +46,9 @@ This repository aims to record a path tracer that I am currently writing for my 
 ## Housekeeping:
 
 - When developing this project, the code is running on <ins>11980HK</ins> and <ins>RTX3080 (laptop version)</ins>.
+  
 - The code is written in Visual Studio 2022 with C++20.
+  
+  Note that if you want to run from the source code, you do need a C++20 compiler since we are indeed using C++20 features.
+  
 - This implementation uses RIGHT-handed coordinate systems.
