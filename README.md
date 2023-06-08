@@ -23,13 +23,14 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 - Integrate the offline ray tracer into the interactive GUI renderer framework. Implementing:
 
-  - non-physical path tracing
-  - Whitted-Style ray tracing
+  - the features of non-physically-based path tracing that has already been implemented in the offline ray tracer
+  - Whitted-Style ray tracing :heavy_check_mark:
+  - a Stanford bunny rendered with acceleration structures (e.g. BVH)
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
 
   <ins>References</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
 
-  **Estimated date of completion:** <ins>15th June 2023</ins>
+  **Estimated date of completion:** <ins>15th July 2023</ins>
   
 - If I have more time, I will improve the ray-tracer by adding more advanced features to it (currently planning to focus on real time denoising).
   
