@@ -2,11 +2,6 @@
 
 This repository aims to record a path tracer that I am currently writing for my MSc module CSC8599.
 
-## Related Repositories
-
-- [The offline prototype of the 8599 ray tracer](https://github.com/IQ404/8599-ray-tracer-prototype)
-- [8599 ray tracer with the Walnut GUI](https://github.com/IQ404/8599-ray-tracer-gui)
-
 ## Objectives:
 
 - Prototype an offline ray tracer.
@@ -43,6 +38,11 @@ This repository aims to record a path tracer that I am currently writing for my 
   <ins>Possible references</ins>: [CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/), [DXR](https://github.com/theroyn/RealTimeRayTracing), [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix), [Vulkan](https://github.com/GPSnoopy/RayTracingInVulkan)
   
   **Estimated date of completion:** <ins>22nd August 2023</ins> which is the deadline of this module (CSC8599).
+  
+## Source code
+
+- [The offline prototype of the 8599 ray tracer](https://github.com/IQ404/8599-ray-tracer-prototype)
+- [8599 ray tracer with the Walnut GUI](https://github.com/IQ404/8599-ray-tracer-gui)
 
 ## Housekeeping:
 
