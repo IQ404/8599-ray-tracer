@@ -25,13 +25,13 @@ This repository aims to record a path tracer that I am currently writing for my 
 
   <ins>References</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
 
-  **Estimated date of completion:** <ins>15th July 2023</ins>
+  **Estimated date of completion:** <ins>22nd July 2023</ins>
   
 - If I have more time, I will improve the ray-tracer by adding more advanced features to it (currently planning to focus on real time denoising).
   
   <ins>Possible references</ins>: [the next book by Peter Shirley](https://raytracing.github.io/books/RayTracingTheNextWeek.html), [GAMES202](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html) (this is the chinese version of [CS292F](https://sites.cs.ucsb.edu/~lingqi/teaching/cs292f.html))
   
-  **Estimated date of completion:** by the <ins>end of July 2023</ins>
+  **Estimated date of completion:** by the <ins>7th August 2023</ins>
 
 - If I still have more time, I will try to accelerate the path tracer by running code on GPU.
   
