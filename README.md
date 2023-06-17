@@ -20,7 +20,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
   - the features of non-physically-based path tracing that has already been implemented in the offline ray tracer
   - Whitted-Style ray tracing :heavy_check_mark:
-  - a Stanford bunny rendered with acceleration structures (e.g. BVH)
+  - a Stanford bunny rendered with acceleration structures (e.g. BVH) :heavy_check_mark:
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
 
   <ins>References</ins>: [GAMES101](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html) (this is the chinese version of [cs180](https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html))
