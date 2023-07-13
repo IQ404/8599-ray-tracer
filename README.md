@@ -18,7 +18,7 @@ This repository aims to record a path tracer that I am currently writing for my 
 
 - Integrate the offline ray tracer into the interactive GUI renderer framework. Implementing:
 
-  - the features of non-physically-based path tracing that has already been implemented in the offline ray tracer
+  - the features of non-physically-based path tracing that has already been implemented in the offline ray tracer :heavy_check_mark:
   - Whitted-Style ray tracing :heavy_check_mark:
   - a Stanford bunny rendered with acceleration structures (e.g. BVH) :heavy_check_mark:
   - physically-based path tracing (i.e. take rendering equation & BRDF into account)
